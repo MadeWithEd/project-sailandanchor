@@ -1,0 +1,48 @@
+#Wrapper {background:url(../images/bg_content-tablet.png) repeat-y center top;}
+
+.contentwidth {width:700px;margin:0 auto;}
+
+#Header {display:block;position:relative;padding:20px 0;}
+#Header #TopLogo {position:absolute;top:30px;left:0;width:215px;height:94px;background:url(../images/logo_sail-anchor.png) no-repeat;}
+#Header #TopLogo span {display:none;}
+#Header ul {display:none;}
+#Header #MobileMenu {display:block;float:right;width:66px;height:49px;background:url(../images/bg_mobile-menu.png) no-repeat;cursor:pointer;}
+#Header.sticky {position:fixed;width:700px;top:0;left:50%;margin:0 0 0 -350px;z-index:9000;background:url(../images/bg_sticky.png);height:90px;}
+#MobileNav {display:block;}
+#MobileNav ul {margin:0;padding:0;list-style-type:none;display:block;float:none;}
+#MobileNav ul li {display:block;float:none;}
+#MobileNav ul li a {display:block;text-align:center;font-size:30px;color:#000;text-decoration:underline;}
+#Header ul li.facebook {width:100%;height:auto;position:relative;text-align:center;}
+#Header ul li.facebook a {background:url(../images/ico_facebook.png) no-repeat left 5px;width:auto;height:37px;min-height:37px;padding:0 0 0 40px;display:inline-block;margin:0 auto;position:relative;}
+#Header ul li.facebook a span {display:block;}
+
+
+.dividor {background:url(../images/bg_dividor-tablet.png) no-repeat;height:30px;}
+
+.page {padding:20px 0;}
+h1 {text-transform:uppercase;font-size:40px;margin:10px 0 20px 0;padding:0;text-shadow:1px 1px 1px #fff;text-align:center;}
+
+#HomePromo {height:390px;}
+#HomePromo #slideshow {max-width:600px;margin:0 auto;height:390px;}
+#HomePromo #slideshow div {width:100%;max-height:360px;}
+#HomePromo #slideshow img {width:100%;max-height:360px;}
+#HomePromo #prevslide {position:absolute;top:140px;left:0;width:40px;height:45px;background:url(../images/bt_slideshow-left.png) no-repeat;}
+#HomePromo #nextslide {position:absolute;top:140px;right:0;width:40px;height:45px;background:url(../images/bt_slideshow-right.png) no-repeat;}
+#HomePromo #prevslide span,#HomePromo #nextslide span {display:none;}
+#HomePromo .cycle-pager {position:absolute;bottom:0;left:50%;margin:0 0 0 -100px;color:#fff;font-size:38px;text-align:center;width:200px;}
+#HomePromo .cycle-pager .cycle-pager-active {color:#000;}
+
+.grid33 {width:33%;float:left;}
+
+.grid50 {width:50%;float:left;font-size:17px;}
+.grid50 h3 {font-family:Courgette;}
+.grid50 img {display:block;width:100%;}
+
+.grid75{width:65%;}
+.grid65{width:60%;}
+
+.pub-article img {width:420px;}
+
+.spacer10 {height:10px;}
+.spavcer20 {height:20px;}
+.clear {display:block;clear:both;}

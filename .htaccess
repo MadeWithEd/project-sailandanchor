@@ -1,0 +1,47 @@
+#AuthType Basic
+#AuthName "LerayGymnastics"
+#AuthUserFile /home/leraygym/.htpasswd
+#Require valid-user
+
+AddHandler application/x-httpd-php52 .php
+#AddHandler application/x-httpd-php5 .html
+
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	#RewriteCond %{HTTP_HOST} !^www\.leraygymnastics\.com\.au [NC]
+	#RewriteRule ^(.*)$ http://www.leraygymnastics.com.au/$1 [R=301,L]
+	
+	
+
+	# Set next line to your Frog root - if not in subdir, then just / 
+	RewriteBase /
+  
+  
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-l
+  # Administration URL rewriting.
+  #RewriteRule ^job(.*)$ index.php?JOB=$1 [L,QSA]
+  
+  
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-l
+  # Administration URL rewriting.
+  #RewriteRule ^search(.*)$ index.php?SEARCH=$1 [L,QSA]
+  
+  
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-l
+  # Administration URL rewriting.
+  #RewriteRule ^management(.*)$ management/index.php?$1 [L,QSA]
+  
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-l
+  # Main URL rewriting.
+  RewriteRule ^(.*)$ index.php?PAGE=$1 [L,QSA]
+
+</IfModule>

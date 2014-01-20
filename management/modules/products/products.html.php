@@ -1,0 +1,653 @@
+<?php
+function DisplayOthers() {
+GLOBAL $search,$CONFIG,$Config,$_REQUEST,$orderby;
+	
+	$WHERE='';
+	$SD["table"]["width"]="100%";
+	$SD["table"]["border"]="0";
+	$SD["table"]["cellpadding"]="0";
+	$SD["table"]["cellspacing"]="0";
+	$SD["table"]["class"]="0";
+	$SD["header"]["class"]="RowHeader";
+	$SD["header"]["divider"]="SpacerRow";
+	$SD["header"]["link"]["class"]="RowHeader";
+	$SD["header"]["fields"]["title"]=array("","Name","Url","Section","Last updated","");
+	$SD["header"]["fields"]["name"]=array("","page_name","page_url","sub_id","last_updated","");
+	$SD["header"]["fields"]["width"]=array("20","300","","180","180","30");
+	$SD["header"]["fields"]["content"]=array("","{page_name}","{page_file_name}","#- if('{sub_id}'==238) { echo 'Our Beer'; } else { echo 'Limited Edition'; } -#","{last_updated}","<a href=\"".FCPATHNICE."?mod=".$_REQUEST["mod"]."&task=create&id={page_id}\"><img src=\"".TEMPLATEPATHNICE."images/ico_edit.gif\" border=\"0\" alt=\"\" /></a>");
+	$SD["query"]["select"]="select *";
+	$SD["query"]["from"]="pages";
+	$SD["query"]["where"]="1 AND (sub_id='238' OR sub_id='243') $WHERE";
+	$SD["data"]["class"]="DataRow";
+	//$SD["extra"]["buttons"]["label"]=array("Download CSV");
+	//$SD["extra"]["buttons"]["onclick"]=array("doDownloadAll('&','".FCPATHNICE."?Hideoutput=1&mod=".$_REQUEST["mod"]."&task=download');");
+	//$SD["extra"]["buttons"]["class"]=array("130");
+	//$SD["extra"]["buttons"]["id"]=array("Sl");
+	?>
+			
+	<h1>Displaying Products</h1>
+			
+	<?=ShowDisplayHeader($SD); ?>
+	
+<?php
+}
+
+function DisplayPageForm($Details) {
+GLOBAL $Config;
+?>
+	<style type="text/css"><!--
+	#Form DIV Label {
+		display:-moz-inline-stack;
+		display:inline-block;
+		zoom:1;
+		*display:inline;
+		float:left;
+		width:150px;
+	}
+	
+	#Form DIV {
+		margin:5px 0 5px 0;
+	}
+	
+	#GuestCol {
+		width:49%;
+		float:left;
+	}
+	
+	#MemberCol {
+		width:49%;
+		float:left;
+	}
+	
+	#MidCol {
+		float:left;
+		width:10px;
+	}
+	//--></style>
+	<script>
+	$('#SubMenu li:eq(2) a').addClass('current');
+	</script>
+	
+	<script language="javascript" type="text/javascript" src="modules/content/js/jquery.js"></script>
+	<script language="javascript" type="text/javascript" src="modules/content/js/mctabs.js"></script>
+	<script language="javascript" type="text/javascript" src="modules/content/js/calendarDateInput.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="modules/content/css/style.css" />
+	
+	<?php if($Details["page_type"]!="php") { ?>
+	<script language="javascript" type="text/javascript" src="<?=FCPATHNICE;?>plugins/tiny_mce3/tiny_mce.js"></script>
+	<script type="text/javascript" src="<?=FCPATHNICE;?>plugins/tiny_mce3/plugins/tinybrowser/tb_tinymce.js.php"></script>
+	<script language="javascript" type="text/javascript">
+	tinyMCE.init({
+	mode : "exact",
+	elements : "page_html,page_donation_title",
+	theme : "advanced",
+	plugins : "emotions,spellchecker,advhr,insertdatetime,preview,advimage,table",
+	theme_advanced_toolbar_location : "top",
+	theme_advanced_toolbar_align : "left",
+	theme_advanced_buttons1 : "formatselect,bold,italic,underline,strikethrough,separator,justifyleft,justifycenter,justifyright,separator,bullist,numlist,outdent,indent,separator,undo,redo",
+	theme_advanced_buttons2 : "tablecontrols,insertimage,link,unlink,anchor,separator,charmap,sub,sup,separator,code,separator,image",
+	theme_advanced_buttons3 : "",
+	theme_advanced_styles : "left50=left50,right50=right50",
+	content_css : "/css/tiny.css",
+	//theme_advanced_disable : "styleselect,formatselect,image,cleanup,help,hr",
+	file_browser_callback : "tinyBrowser",
+	theme_advanced_statusbar_location : false,
+	paste_use_dialog : false,
+	theme_advanced_resizing : true,
+	theme_advanced_resize_horizontal : false,
+	paste_auto_cleanup_on_paste : true,
+	paste_convert_headers_to_strong : false,
+	paste_strip_class_attributes : "all",
+	paste_remove_spans : false,
+	paste_remove_styles : false,
+	paste_strip_class_attributes : "none",
+	relative_urls : false,
+	remove_script_host : false,
+	fix_content_duplication : false,
+	valid_elements : ""
++"a[accesskey|charset|class|coords|dir<ltr?rtl|href|hreflang|id|lang|name"
+  +"|onblur|onclick|ondblclick|onfocus|onkeydown|onkeypress|onkeyup"
+  +"|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|rel|rev"
+  +"|shape<circle?default?poly?rect|style|tabindex|title|target|type],"
++"abbr[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title],"
++"acronym[class|dir<ltr?rtl|id|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title],"
++"address[class|align|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+  +"|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+  +"|onmouseup|style|title],"
++"applet[align<bottom?left?middle?right?top|alt|archive|class|code|codebase"
+  +"|height|hspace|id|name|object|style|title|vspace|width],"
++"area[accesskey|alt|class|coords|dir<ltr?rtl|href|id|lang|nohref<nohref"
+  +"|onblur|onclick|ondblclick|onfocus|onkeydown|onkeypress|onkeyup"
+  +"|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup"
+  +"|shape<circle?default?poly?rect|style|tabindex|title|target],"
++"base[href|target],"
++"basefont[color|face|id|size],"
++"bdo[class|dir<ltr?rtl|id|lang|style|title],"
++"big[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title],"
++"blockquote[cite|class|dir<ltr?rtl|id|lang|onclick|ondblclick"
+  +"|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout"
+  +"|onmouseover|onmouseup|style|title],"
++"body[alink|background|bgcolor|class|dir<ltr?rtl|id|lang|link|onclick"
+  +"|ondblclick|onkeydown|onkeypress|onkeyup|onload|onmousedown|onmousemove"
+  +"|onmouseout|onmouseover|onmouseup|onunload|style|title|text|vlink],"
++"br[class|clear<all?left?none?right|id|style|title],"
++"button[accesskey|class|dir<ltr?rtl|disabled<disabled|id|lang|name|onblur"
+  +"|onclick|ondblclick|onfocus|onkeydown|onkeypress|onkeyup|onmousedown"
+  +"|onmousemove|onmouseout|onmouseover|onmouseup|style|tabindex|title|type"
+  +"|value],"
++"caption[align<bottom?left?right?top|class|dir<ltr?rtl|id|lang|onclick"
+  +"|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+  +"|onmouseout|onmouseover|onmouseup|style|title],"
++"center[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title],"
++"cite[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title],"
++"code[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title],"
++"col[align<center?char?justify?left?right|char|charoff|class|dir<ltr?rtl|id"
+  +"|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown"
+  +"|onmousemove|onmouseout|onmouseover|onmouseup|span|style|title"
+  +"|valign<baseline?bottom?middle?top|width],"
++"colgroup[align<center?char?justify?left?right|char|charoff|class|dir<ltr?rtl"
+  +"|id|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown"
+  +"|onmousemove|onmouseout|onmouseover|onmouseup|span|style|title"
+  +"|valign<baseline?bottom?middle?top|width],"
++"dd[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup"
+  +"|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style|title],"
++"del[cite|class|datetime|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+  +"|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+  +"|onmouseup|style|title],"
++"dfn[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title],"
++"dir[class|compact<compact|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+  +"|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+  +"|onmouseup|style|title],"
++"div[align<center?justify?left?right|class|dir<ltr?rtl|id|lang|onclick"
+  +"|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+  +"|onmouseout|onmouseover|onmouseup|style|title],"
++"dl[class|compact<compact|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+  +"|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+  +"|onmouseup|style|title],"
++"dt[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup"
+  +"|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style|title],"
++"em/i[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title],"
++"fieldset[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title],"
++"font[class|color|dir<ltr?rtl|face|id|lang|size|style|title],"
++"form[accept|accept-charset|action|class|dir<ltr?rtl|enctype|id|lang"
+  +"|method<get?post|name|onclick|ondblclick|onkeydown|onkeypress|onkeyup"
+  +"|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|onreset|onsubmit"
+  +"|style|title|target],"
++"frame[class|frameborder|id|longdesc|marginheight|marginwidth|name"
+  +"|noresize<noresize|scrolling<auto?no?yes|src|style|title],"
++"frameset[class|cols|id|onload|onunload|rows|style|title],"
++"h1[align<center?justify?left?right|class|dir<ltr?rtl|id|lang|onclick"
+  +"|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+  +"|onmouseout|onmouseover|onmouseup|style|title],"
++"h2[align<center?justify?left?right|class|dir<ltr?rtl|id|lang|onclick"
+  +"|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+  +"|onmouseout|onmouseover|onmouseup|style|title],"
++"h3[align<center?justify?left?right|class|dir<ltr?rtl|id|lang|onclick"
+  +"|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+  +"|onmouseout|onmouseover|onmouseup|style|title],"
++"h4[align<center?justify?left?right|class|dir<ltr?rtl|id|lang|onclick"
+  +"|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+  +"|onmouseout|onmouseover|onmouseup|style|title],"
++"h5[align<center?justify?left?right|class|dir<ltr?rtl|id|lang|onclick"
+  +"|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+  +"|onmouseout|onmouseover|onmouseup|style|title],"
++"h6[align<center?justify?left?right|class|dir<ltr?rtl|id|lang|onclick"
+  +"|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+  +"|onmouseout|onmouseover|onmouseup|style|title],"
++"head[dir<ltr?rtl|lang|profile],"
++"hr[align<center?left?right|class|dir<ltr?rtl|id|lang|noshade<noshade|onclick"
+  +"|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+  +"|onmouseout|onmouseover|onmouseup|size|style|title|width],"
++"html[dir<ltr?rtl|lang|version],"
++"iframe[align<bottom?left?middle?right?top|class|frameborder|height|id"
+  +"|longdesc|marginheight|marginwidth|name|scrolling<auto?no?yes|src|style"
+  +"|title|width],"
++"img[align<bottom?left?middle?right?top|alt|border|class|dir<ltr?rtl|height"
+  +"|hspace|id|ismap<ismap|lang|longdesc|name|onclick|ondblclick|onkeydown"
+  +"|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+  +"|onmouseup|src|style|title|usemap|vspace|width],"
++"input[accept|accesskey|align<bottom?left?middle?right?top|alt"
+  +"|checked<checked|class|dir<ltr?rtl|disabled<disabled|id|ismap<ismap|lang"
+  +"|maxlength|name|onblur|onclick|ondblclick|onfocus|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|onselect"
+  +"|readonly<readonly|size|src|style|tabindex|title"
+  +"|type<button?checkbox?file?hidden?image?password?radio?reset?submit?text"
+  +"|usemap|value],"
++"ins[cite|class|datetime|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+  +"|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+  +"|onmouseup|style|title],"
++"isindex[class|dir<ltr?rtl|id|lang|prompt|style|title],"
++"kbd[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title],"
++"label[accesskey|class|dir<ltr?rtl|for|id|lang|onblur|onclick|ondblclick"
+  +"|onfocus|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout"
+  +"|onmouseover|onmouseup|style|title],"
++"legend[align<bottom?left?right?top|accesskey|class|dir<ltr?rtl|id|lang"
+  +"|onclick|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+  +"|onmouseout|onmouseover|onmouseup|style|title],"
++"li[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup"
+  +"|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style|title|type"
+  +"|value],"
++"link[charset|class|dir<ltr?rtl|href|hreflang|id|lang|media|onclick"
+  +"|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+  +"|onmouseout|onmouseover|onmouseup|rel|rev|style|title|target|type],"
++"map[class|dir<ltr?rtl|id|lang|name|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title],"
++"menu[class|compact<compact|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+  +"|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+  +"|onmouseup|style|title],"
++"meta[content|dir<ltr?rtl|http-equiv|lang|name|scheme],"
++"noframes[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title],"
++"noscript[class|dir<ltr?rtl|id|lang|style|title],"
++"object[align<bottom?left?middle?right?top|archive|border|class|classid"
+  +"|codebase|codetype|data|declare|dir<ltr?rtl|height|hspace|id|lang|name"
+  +"|onclick|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+  +"|onmouseout|onmouseover|onmouseup|standby|style|tabindex|title|type|usemap"
+  +"|vspace|width],"
++"ol[class|compact<compact|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+  +"|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+  +"|onmouseup|start|style|title|type],"
++"optgroup[class|dir<ltr?rtl|disabled<disabled|id|label|lang|onclick"
+  +"|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+  +"|onmouseout|onmouseover|onmouseup|style|title],"
++"option[class|dir<ltr?rtl|disabled<disabled|id|label|lang|onclick|ondblclick"
+  +"|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout"
+  +"|onmouseover|onmouseup|selected<selected|style|title|value],"
++"p[align<center?justify?left?right|class|dir<ltr?rtl|id|lang|onclick"
+  +"|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+  +"|onmouseout|onmouseover|onmouseup|style|title],"
++"param[id|name|type|value|valuetype<DATA?OBJECT?REF],"
++"pre/listing/plaintext/xmp[align|class|dir<ltr?rtl|id|lang|onclick|ondblclick"
+  +"|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout"
+  +"|onmouseover|onmouseup|style|title|width],"
++"q[cite|class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title],"
++"s[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup"
+  +"|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style|title],"
++"samp[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title],"
++"script[charset|defer|language|src|type],"
++"select[class|dir<ltr?rtl|disabled<disabled|id|lang|multiple<multiple|name"
+  +"|onblur|onchange|onclick|ondblclick|onfocus|onkeydown|onkeypress|onkeyup"
+  +"|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|size|style"
+  +"|tabindex|title],"
++"small[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title],"
++"span[align<center?justify?left?right|class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+  +"|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+  +"|onmouseup|style|title],"
++"strike[class|class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+  +"|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+  +"|onmouseup|style|title],"
++"strong/b[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title],"
++"style[dir<ltr?rtl|lang|media|title|type],"
++"sub[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title],"
++"sup[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title],"
++"table[align<center?left?right|bgcolor|border|cellpadding|cellspacing|class"
+  +"|dir<ltr?rtl|frame|height|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|rules"
+  +"|style|summary|title|width],"
++"tbody[align<center?char?justify?left?right|char|class|charoff|dir<ltr?rtl|id"
+  +"|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown"
+  +"|onmousemove|onmouseout|onmouseover|onmouseup|style|title"
+  +"|valign<baseline?bottom?middle?top],"
++"td[abbr|align<center?char?justify?left?right|axis|bgcolor|char|charoff|class"
+  +"|colspan|dir<ltr?rtl|headers|height|id|lang|nowrap<nowrap|onclick"
+  +"|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+  +"|onmouseout|onmouseover|onmouseup|rowspan|scope<col?colgroup?row?rowgroup"
+  +"|style|title|valign<baseline?bottom?middle?top|width],"
++"textarea[accesskey|class|cols|dir<ltr?rtl|disabled<disabled|id|lang|name"
+  +"|onblur|onclick|ondblclick|onfocus|onkeydown|onkeypress|onkeyup"
+  +"|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|onselect"
+  +"|readonly<readonly|rows|style|tabindex|title],"
++"tfoot[align<center?char?justify?left?right|char|charoff|class|dir<ltr?rtl|id"
+  +"|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown"
+  +"|onmousemove|onmouseout|onmouseover|onmouseup|style|title"
+  +"|valign<baseline?bottom?middle?top],"
++"th[abbr|align<center?char?justify?left?right|axis|bgcolor|char|charoff|class"
+  +"|colspan|dir<ltr?rtl|headers|height|id|lang|nowrap<nowrap|onclick"
+  +"|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+  +"|onmouseout|onmouseover|onmouseup|rowspan|scope<col?colgroup?row?rowgroup"
+  +"|style|title|valign<baseline?bottom?middle?top|width],"
++"thead[align<center?char?justify?left?right|char|charoff|class|dir<ltr?rtl|id"
+  +"|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown"
+  +"|onmousemove|onmouseout|onmouseover|onmouseup|style|title"
+  +"|valign<baseline?bottom?middle?top],"
++"title[dir<ltr?rtl|lang],"
++"tr[abbr|align<center?char?justify?left?right|bgcolor|char|charoff|class"
+  +"|rowspan|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title|valign<baseline?bottom?middle?top],"
++"tt[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup"
+  +"|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style|title],"
++"u[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup"
+  +"|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style|title],"
++"ul[class|compact<compact|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+  +"|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+  +"|onmouseup|style|title|type],"
++"var[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+  +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+  +"|title]",
+	extended_valid_elements : "html,body,head,title,iframe[id|src|border|width|height|frameborder|marginheight|marginwidth|scrolling],script[src|language|type],div[id|class|name|style],php,span[class],form[name|id|action|method|enctype|accept-charset|onsubmit|onreset|target|style|class|summary],input[id|name|type|value|size|maxlength|checked|accept|src|width|height|disabled|readonly|tabindex|accesskey|onfocus|onblur|onchange|onselect|onclick|required|style|class|summary],textarea[id|name|rows|cols|disabled|readonly|tabindex|accesskey|onfocus|onblur|onchange|onselect|onclick|required|style|class|summary],option[name|id|value|selected|style|class|summary],select[id|name|type|value|size|maxlength|checked|accept|src|width|height|disabled|readonly|tabindex|accesskey|onfocus|onblur|onchange|onselect|onclick|length|options|selectedIndex|required|style|class|summary]",
+	remove_linebreaks: false,
+	document_base_url : "<?=$_SERVER["SERVER_NAME"];?>"
+	});
+</script>
+	<?php } ?>
+	
+	<h1><?=($_REQUEST["id"]>0)?'Editing '.stripslashes($Details["page_name"]):'Add New Content';?></h1>
+	
+	<?=DisplayError();?>
+	<form name="Form" id="Form" method="post" action="<?=$_SERVER["PHP_SELF"];?>" enctype="multipart/form-data">
+	<input type="hidden" name="id" value="<?php if(isset($_REQUEST["id"]) && $_REQUEST["id"]!="") { echo $_REQUEST["id"]; } ?>" />
+	<input type="hidden" name="mod" value="<?=$_REQUEST["mod"];?>" />
+	<input type="hidden" name="task" value="save" />
+	<input type="hidden" name="mandatory" value="page_name,page_html" />
+		
+		<div id="Controls">
+			<div><input type="image" src="<?=TEMPLATEPATHNICE.'images/save_f2.png';?>" alt="" name="save" /><br />save</div>
+			<div><input type="image" src="<?=TEMPLATEPATHNICE.'images/cancel_f2.png';?>" alt="" name="cancel" /><br />cancel</div>
+			<?php if($_REQUEST["id"]>0) { ?><div><input type="image" src="<?=TEMPLATEPATHNICE.'images/delete_f2.png';?>" border="0" alt="" name="remove" onclick="if(!confirm('Warning! Clicking OK will permanently remove this page')) { return false; }" /><br />delete</div><?php } ?>
+		</div>
+		<div style="clear:both;">&nbsp;</div>
+		
+		<div class="tabs">
+			<ul>
+				<li id="one_tab"<?=(!isset($_REQUEST["step"]))?' class="current"':'';?>><span><a href="javascript:mcTabs.displayTab('one_tab','one_panel');" onmousedown="return false;">Step 1: Page Details</a></span></li>
+				<?php if($_REQUEST["id"]>0) { ?>
+				<li id="two_tab"><span><a href="javascript:mcTabs.displayTab('two_tab','two_panel');">Step 2: Page Content</a></span></li>
+				<li id="three_tab"><span><a href="javascript:mcTabs.displayTab('three_tab','three_panel');" onmousedown="return false;">Optional: Search Engine Metadata</a></span></li>
+				<?php } ?>
+			</ul>
+		</div>
+		
+		<div class="panel_wrapper">
+		<div id="one_panel" class="panel<?=(!isset($_REQUEST["step"]))?' current':'';?>">
+		
+			<h1>Step One: Page Details</h1>
+			
+			<div class="TextPromptGrey"><b>Page Title and Assignment</b> - Please provide a title for your page and specify under which area it is to appear.</div>
+			
+			<div<?=HighlightMandatory("page_name");?>>
+				<label>Page Title <?= ShowMandatory("page_name"); ?></label>
+				<input type="text" size="30" name="page_name" value="<?=ShowDataText("page_name");?>" />
+			</div>
+			
+			<div>
+				<label>Status</label>
+				<select name="page_status">
+				<?=PopulateSelectGeneric(array("0","1","2"),array("Draft","Live","Archived"),ShowDataText("page_status"));?>
+				</select>
+			</div>
+			
+			<div<?=HighlightMandatory("sub_id");?>>
+				<label>Assigned To <?= ShowMandatory("sub_id"); ?></label>
+				<select name="sub_id" id="sub_id" style="width:200px;">
+				<option value="">- please select -</option>
+				<option value="238"<?=ShowSelected('238',"sub_id",$Details);?>>Our Beer</option>
+				<option value="243"<?=ShowSelected('243',"sub_id",$Details);?>>Limited Edition</option>
+				</select>
+			</div>
+			
+			<div<?=HighlightMandatory("page_file_name");?>>
+				<label>Page Url (optional)</label>
+				<input type="text" size="30" name="page_file_name" value="<?=ShowDataText("page_file_name");?>" />
+			</div>
+			
+			<?php if(is_file($Config["content"]["images"].$Details["page_masthead"])) { ?>
+			<div class="row">
+				<label>Thumbnail</label>
+				<img src="<?=$Config["content"]["images_nice"].$Details["page_masthead"];?>" border="0" alt="" id="current_image" />
+			</div>
+			<div class="row">
+				<label>&nbsp;</label>
+				<input type="checkbox" name="remove_current_image" value="Y" /> Remove Image
+			</div>
+			<?php } ?>
+			<div class="row">
+				<label>Product Thumbnail</label>
+				<input type="file" id="page_masthead" name="page_masthead" value="Browse for Image" />
+			</div>
+			
+			<?php if(is_file($Config["content"]["images"].$Details["page_background"])) { ?>
+			<div class="row">
+				<label>Background</label>
+				<img src="<?=$Config["content"]["images_nice"].$Details["page_background"];?>" border="0" alt="" id="current_background" />
+			</div>
+			<div class="row">
+				<label>&nbsp;</label>
+				<input type="checkbox" name="remove_current_background" value="Y" /> Remove Background
+			</div>
+			<?php } ?>
+			<div class="row">
+				<label>Custom Background</label>
+				<input type="file" id="page_background" name="page_background" value="Browse for Background" />
+			</div>
+	
+		</div>
+		<div id="two_panel" class="panel<?=(isset($_REQUEST["step"]))?' current':'';?>">
+			<h1>Step Two: Page Content</h1>
+			
+			<?php
+			#################
+			## FORM PAGE
+			#################
+			
+			if($Details["is_form"]=="Y") {
+			?>
+				<div class="TextPromptGrey"><b>Description<?php if($Details["form_type"]=="donation" || $Details["form_type"]=="monthly-donation") { ?> and Amounts<?php } ?></b></div>
+				<div>
+					<label>Heading</label>
+					<input type="text" size="50" name="page_donation_title" id="page_donation_title" value="<?=ShowDataText("page_donation_title");?>" />
+				</div>
+				<div>
+					<label>Description</label>
+					<textarea class="editor" rows="15" cols="70" name="page_html" id="page_html" style="width:800px"><?=ShowDataText("page_html");?></textarea>
+				</div>
+				
+				
+				<script>
+				//tinyMCE.execCommand('mceAddControl', false, 'page_html');
+				</script>
+								
+				<div class="TextPromptGrey"><b>Confirmation Email</b></div>
+				<div>
+					<label>&nbsp;</label>
+					<input type="checkbox" name="page_donation_send_email" value="Y"<?=ShowChecked("Y","page_donation_send_email",$Details);?> /> Send confirmation email to recipient
+				</div>
+				<div>
+					<label>Email Subject</label>
+					<input type="text" size="50" name="page_donation_email_subject" id="page_donation_email_subject" value="<?=ShowDataText("page_donation_email_subject");?>" />
+				</div>
+				<div>
+					<label>Email Text</label>
+					<textarea class="editor" rows="15" cols="70" name="page_donation_email" id="page_donation_email" style="width:800px"><?=ShowDataText("page_donation_email");?></textarea>
+				</div>
+				<script>
+				tinyMCE.execCommand('mceAddControl', false, 'page_donation_email');
+				</script>
+				<div class="TextPromptGrey"><b>Confirmation Page</b></div>
+				<div<?=HighlightMandatory("redirect_id");?>>
+				<label>Redirect To <?= ShowMandatory("redirect_id"); ?></label>
+				<select name="redirect_id" id="redirect_id">
+				<option value="">- please select -</option>
+				<?php
+				$pageswhere='';
+				$sql=mysql_query("SELECT * from pages ORDER BY sort_order");
+				while($row=mysql_fetch_array($sql)) {
+				?><option value="<?=$row["page_id"];?>"<?=ShowSelected($row["page_id"],"redirect_id",$Details);?>><?=DisplayRecursive($row["sub_id"]) . ' - '.stripslashes($row["page_name"]);?></option><?php
+				}
+				?>
+				</select>
+			</div>
+			<?php
+			}
+			else {
+			?>
+				<div>
+					<label>Optional Heading</label>
+					<input type="text" size="50" name="page_title" id="page_title" value="<?=ShowDataText("page_title");?>" />
+				</div>
+				<h3>Content Section</h3>
+				<textarea name="page_html" id="page_html" rows="30" cols="50" style="width:100%;height:600px;" class="mceEditor"><?= str_replace(array("<",">"),array("&lt;","&gt;"),ShowDataText("page_html")); ?></textarea>
+		
+			<?php
+			}
+			?>
+		</div>
+		<div id="three_panel" class="panel<?=(isset($_REQUEST["sub"]) && $_REQUEST["sub"]=="seo")?' current':'';?>">
+			<div class="TextPromptGrey">This section allows you to edit the meta data that search engines use to help rank your page.</div>
+			<div class="row">
+				<label>Title</label>
+				<input type="text" size="30" name="page_meta_title" value="<?=ShowDataText("page_meta_title");?>" />
+			</div>
+			<div class="row">
+				<label>Keywords</label>
+				<input type="text" size="30" name="page_meta_keywords" value="<?=ShowDataText("page_meta_keywords");?>" />
+			</div>
+			<div class="row">
+				<label>Description</label>
+				<textarea rows="7" cols="40" name="page_meta_description"><?=ShowDataText("page_meta_description");?></textarea>
+			</div>
+		</div>
+		
+	</form>
+	<?php
+}
+
+
+function DisplaySearch() {
+?>
+	<style type="text/css"><!--
+	#Form DIV Label {
+		display:-moz-inline-stack;
+		display:inline-block;
+		zoom:1;
+		*display:inline;
+		float:left;
+		width:150px;
+	}
+	
+	#Form DIV {
+		margin:5px 0 5px 0;
+	}
+	
+	#GuestCol {
+		width:49%;
+		float:left;
+	}
+	
+	#MemberCol {
+		width:49%;
+		float:left;
+	}
+	
+	#MidCol {
+		float:left;
+		width:10px;
+	}
+	//--></style>
+	<script>
+	$('#SubMenu li:eq(1) a').addClass('current');
+	</script>
+	
+<h1>Contacts &gt; Search</h1>
+	<form name="Form" id="Form" method="get" action="<?=$_SERVER["PHP_SELF"];?>">
+	<input type="hidden" name="mod" value="<?=$_REQUEST["mod"];?>" />
+	<input type="hidden" name="search" value="search" />
+	<input type="hidden" name="task" value="other" />
+	
+		<div id="Controls">
+			<div><input type="image" src="<?=TEMPLATEPATHNICE.'images/save_f2.png';?>" alt="" name="search" /><br />search</div>
+			<div><input type="image" src="<?=TEMPLATEPATHNICE.'images/cancel_f2.png';?>" alt="" name="cancel" /><br />cancel</div>
+		</div>
+		<div style="clear:both;">&nbsp;</div>
+	
+		<div>
+			<label>Name </label>
+			<input type="text" size="30" name="name" value="<?= ShowDataText("name"); ?>" />
+		</div>
+		<div>
+			<label>Contact type</label>
+			<select name="contact_type[]" multiple="multiple" size="5">
+			<?=PopulateSelectState(array("Staff","Health Practitioner","Health Fund","Customer","Pregnancy","cpap","Other"),ShowDataText("contact_type"));?>
+			</select>
+		</div>
+		<div>
+			<label>Business name </label>
+			<input type="text" size="30" name="business_name" value="<?= ShowDataText("business_name"); ?>" />
+		</div>
+		<div>
+			<label>Business postcode </label>
+			<input type="text" size="10" name="business_postcode" value="<?= ShowDataText("business_postcode"); ?>" />
+		</div>
+		<div>
+			<label>State</label>
+			<select name="business_state">
+			<option value="">- optional -</option>
+			<?=PopulateSelectState(array("NSW","ACT","WA","QLD","SA","WA","NT","QLD","TAS"),ShowDataText("business_state"));?>
+			</select>
+		</div>
+		
+	</form>
+<?php
+}
+
+function DisplayOptions() {
+?>
+<div style="position:relative;background:#fff;padding:20px;width:250px;" id="SaleOptions">
+	
+	<a href="javascript:;" id="Close" style="position:absolute;top:-10px;right:-10px;width:30px;height:30px;"><img src="/management/modules/messages/bt_close-popup.png" border="0" /></a>
+	
+	Options for: <?=MySQLResult("SELECT first_name FROM contacts WHERE contact_id='".$_REQUEST["id"]."'");?>
+	
+	<a class="link" href="/management/?mod=contacts&task=create&id=<?=$_REQUEST["id"];?>">View/Edit Contact</a>
+	
+	
+</div>
+<script>
+$('#Close').click(function(){
+	$('#popup').hide();
+	$("#popup").css('z-index','1');
+	$('#popup').html('');
+	$("#LightboxPanel").fadeOut(500);
+	showFields();
+	$('TD.DataRow').parent().css('background','none');
+return false;
+});
+</script>
+<?php
+}
+?>

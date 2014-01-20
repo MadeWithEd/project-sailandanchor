@@ -1,0 +1,48 @@
+#Wrapper {background:url(../images/bg_content-mini.png) repeat-y center top;}
+
+.contentwidth {width:600px;margin:0 auto;}
+
+#Header {display:block;position:relative;padding:30px 0;}
+#Header #TopLogo {position:absolute;top:30px;left:0;width:215px;height:94px;background:url(../images/logo_sail-anchor.png) no-repeat;}
+#Header #TopLogo span {display:none;}
+#Header ul {display:none;}
+#Header #MobileMenu {display:block;float:right;width:40px;height:40px;background:url(../images/bg_mobile-menu-mini.png) no-repeat;cursor:pointer;}
+#Header.sticky {position:fixed;width:600px;top:0;left:50%;margin:0 0 0 -300px;z-index:9000;background:url(../images/bg_sticky.png);height:90px;}
+
+#MobileNav ul {margin:0;padding:0;list-style-type:none;display:block;float:none;}
+#MobileNav ul li {display:block;float:none;}
+#MobileNav ul li a {display:block;text-align:center;font-size:30px;color:#000;text-decoration:underline;}
+
+.dividor {background:url(../images/bg_dividor-mini.png) no-repeat;height:26px;}
+
+.page {padding:20px 0;}
+h1 {text-transform:uppercase;font-size:35px;margin:0;padding:0;text-shadow:1px 1px 1px #fff;text-align:center;}
+
+#HomePromo {height:360px;}
+#HomePromo #slideshow {max-width:500px;margin:0 auto;padding:0;height:360px;}
+#HomePromo #slideshow div {width:100%;max-height:310px;}
+#HomePromo #slideshow img {width:100%;max-height:310px;}
+#HomePromo #prevslide {position:absolute;top:120px;left:0;width:40px;height:45px;background:url(../images/bt_slideshow-left.png) no-repeat;}
+#HomePromo #nextslide {position:absolute;top:120px;right:0;width:40px;height:45px;background:url(../images/bt_slideshow-right.png) no-repeat;}
+#HomePromo #prevslide span,#HomePromo #nextslide span {display:none;}
+#HomePromo .cycle-pager {position:absolute;bottom:0;left:50%;margin:0 0 0 -100px;color:#fff;font-size:38px;text-align:center;width:200px;}
+#HomePromo .cycle-pager .cycle-pager-active {color:#000;}
+
+a.ourbeer-link {display:block;text-decoration:none;}
+a.ourbeer-link span {display:block;text-align:center;color:#000;text-decoration:none;font-size:15px;font-weight:bold;}
+
+.grid33 {width:33%;float:left;}
+
+.grid50 {width:50%;float:left;font-size:15px;}
+.grid50 h3 {font-family:Courgette;}
+.grid50 img {display:block;width:100%;}
+
+.grid75{width:65%;}
+.grid65{width:60%;}
+
+.pub-article img {width:360px;}
+
+
+.spacer10 {height:10px;}
+.spavcer20 {height:20px;}
+.clear {display:block;clear:both;}

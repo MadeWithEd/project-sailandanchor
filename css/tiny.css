@@ -1,0 +1,9 @@
+.grid20 {float:left;width:19%;}
+.grid25 {float:left;width:24%;}
+.grid25 img {width:100%;display:block;}
+.grid50 {float:left;width:49%;}
+.grid50 img {width:100%;display:block;}
+.grid75{width:75%;}
+.grid65{width:65%;}
+.grid33 {width:33%;float:left;}
+div {border:1px dashed #ccc;}

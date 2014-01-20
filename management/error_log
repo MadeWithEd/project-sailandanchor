@@ -1,0 +1,16 @@
+[25-Jun-2013 07:50:55] PHP Warning:  opendir(/home/audreypa/public_html/jobadder/) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory in /home/audreypa/public_html/management/core/dashboard.inc.php on line 10
+[25-Jun-2013 07:50:55] PHP Warning:  readdir(): supplied argument is not a valid Directory resource in /home/audreypa/public_html/management/core/dashboard.inc.php on line 11
+[09-Sep-2013 09:27:58] PHP Warning:  copy(/home/audreypa/public_html/uploads/2kqm02ek418gcc84.jpg) [<a href='function.copy'>function.copy</a>]: failed to open stream: No such file or directory in /home/audreypa/public_html/management/modules/content/content.php on line 126
+[09-Sep-2013 12:59:37] PHP Fatal error:  Call to undefined function  populateselectgeneric() in /home/audreypa/public_html/management/modules/content/content.html.php on line 521
+[09-Sep-2013 13:00:44] PHP Fatal error:  Call to undefined function  populateselectgeneric() in /home/audreypa/public_html/management/modules/content/content.html.php on line 521
+[09-Sep-2013 13:00:48] PHP Fatal error:  Call to undefined function  populateselectgeneric() in /home/audreypa/public_html/management/modules/content/content.html.php on line 521
+[09-Sep-2013 13:01:33] PHP Fatal error:  Cannot redeclare populateselectstate() (previously declared in /home/audreypa/public_html/management/core/functions.inc.php:659) in /home/audreypa/public_html/management/core/functions.inc.php on line 763
+[16-Sep-2013 11:13:37] PHP Parse error:  syntax error, unexpected ';' in /home/audreypa/public_html/management/modules/content/content.php on line 100
+[16-Sep-2013 11:14:22] PHP Parse error:  syntax error, unexpected ';' in /home/audreypa/public_html/management/modules/content/content.php on line 100
+[20-Jan-2014 09:36:11] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/sailmade/public_html/management/core/functions.inc.php(155) : eval()'d code on line 1
+[20-Jan-2014 09:36:11] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/sailmade/public_html/management/core/functions.inc.php(155) : eval()'d code on line 1
+[20-Jan-2014 09:36:11] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/sailmade/public_html/management/core/functions.inc.php(155) : eval()'d code on line 1
+[20-Jan-2014 09:36:11] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/sailmade/public_html/management/core/functions.inc.php(155) : eval()'d code on line 1
+[20-Jan-2014 09:39:46] PHP Fatal error:  Call to undefined function  displayrecursive() in /home/sailmade/public_html/management/modules/news/news.html.php on line 425
+[20-Jan-2014 09:42:16] PHP Parse error:  syntax error, unexpected '<' in /home/sailmade/public_html/management/modules/news/news.html.php on line 421
+[20-Jan-2014 14:29:34] PHP Parse error:  syntax error, unexpected '=', expecting ')' in /home/sailmade/public_html/management/core/dashboard.inc.php on line 15
